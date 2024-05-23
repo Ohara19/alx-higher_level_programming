@@ -1,24 +1,24 @@
 #!/usr/bin/python3
-'''find the link in an unsorted integer'''
+"""Finds a peak in a list of unsorted integers"""
+
 
 def find_peak(list_of_integers):
-    if not list_of_integers:
+    """Finds a peak in list_of_integers"""
+
+    if list_of_integers is None or list_of_integers == []:
         return None
-    
-    return _find_peak_helper(list_of_integers, 0, len(list_of_integers) - 1)
-
-def _find_peak_helper(arr, low, high):
-    mid = (low + high) // 2
-    
-    # Check if the middle element is a peak
-    if (mid == 0 or arr[mid] >= arr[mid - 1]) and (mid == len(arr) - 1 or arr[mid] >= arr[mid + 1]):
-        return arr[mid]
-    
-    # If the left neighbor is greater, then the peak is in the left half
-    elif mid > 0 and arr[mid - 1] > arr[mid]:
-        return _find_peak_helper(arr, low, mid - 1)
-    
-    # If the right neighbor is greater, then the peak is in the right half
-    else:
-        return _find_peak_helper(arr, mid + 1, high)
-
+    lo = 0
+    hi = len(list_of_integers)
+    mid = ((hi - lo) // 2) + lo
+    mid = int(mid)
+    if hi == 1:
+        return list_of_integers[0]
+    if hi == 2:
+        return max(list_of_integers)
+    if list_of_integers[mid] >= list_of_integers[mid - 1] and\
+            list_of_integers[mid] >= list_of_integers[mid + 1]:
+        return list_of_integers[mid]
+    if mid > 0 and list_of_integers[mid] < list_of_integers[mid + 1]:
+        return find_peak(list_of_integers[mid:])
+    if mid > 0 and list_of_integers[mid] < list_of_integers[mid - 1]:
+        return find_peak(list_of_integers[:mid])
