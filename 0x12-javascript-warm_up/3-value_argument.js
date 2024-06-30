@@ -1,17 +1,15 @@
 #!/usr/bin/node
+// using destruct
+// using slice(2) to start the slice from the third element of the process.argv array,
+// skipping over the node command and the name of the script itself
 
-// calculate the number of arguments passed to the script using 'process.argv.length - 2'
-// sbtracting 2 to exclude the 'node' command and the name of the script itself
+const [arg] = process.argv.slice(2);
 
-const argsCount = process.argv.length - 2;
-
-// using 'if...else' statement to check the value of 'argsCount'
-// using 'console.log' to print the appropriate message
-
-if (argsCount === 0) {
+// using an if...else statement to check if arg exists
+if (!arg) {
   console.log('No argument');
-} else if (argsCount === 1) {
-  console.log('Argument found');
+
+//  Otherwise, we print arg using console.log(...)
 } else {
-  console.log('Arguments found');
+  console.log(arg);
 }
